@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/dashboard.js"></script>
+    <title>Clientes</title>
+</head>
+<body>
+    <div class="contenedor_menu">
+
+        <aside class="sidebar">
+            <div class="header-menu">
+                <img class="logo" src="assets/logo-principal.png" alt="Logo de Federico Arango V.">
+                <span class="nombre">
+                    Federico Arango V.
+                    <small>Médico veterinario</small>
+                </span>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="dashboard_home.html"><i data-lucide="home" class="icono"></i>Inicio</a></li>
+                    <li><a href="dashboard_clientes.html" class="active"><i data-lucide="users" class="icono"></i>Clientes</a></li>
+                    <li><a href="dashboard_facturacion.html"><i data-lucide="file-text" class="icono"></i>Facturación</a></li>
+                    <li><a href="dashboard_configuracion.html"><i data-lucide="settings" class="icono"></i>Configuración</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="contenedor_principal">
+
+            <header class="topbar">
+                <h1>Clientes</h1>
+                <div class="user-info">
+                    <span class="username">Hola, Federico!</span>
+                </div>
+            </header>
+
+            <section class="stats">
+                <article class="vidrio stat-card">
+                    <div class="stat-icono"><i data-lucide="users" class="icono"></i></div>
+                    <div>
+                        <span class="stat-label">Total de clientes</span>
+                        <strong class="stat-valor">150</strong>
+                    </div>
+                </article>
+
+                <article class="vidrio stat-card">
+                    <div class="stat-icono"><i data-lucide="user-plus" class="icono"></i></div>
+                    <div>
+                        <span class="stat-label">Nuevos este mes</span>
+                        <strong class="stat-valor">12</strong>
+                    </div>
+                </article>
+
+                <article class="vidrio stat-card">
+                    <div class="stat-icono"><i data-lucide="paw-print" class="icono"></i></div>
+                    <div>
+                        <span class="stat-label">Clientes con mascotas</span>
+                        <strong class="stat-valor">147</strong>
+                    </div>
+                </article>
+            </section>
+
+            <section class="vidrio panel listado">
+
+                <div class="listado-header">
+                    <h2><i data-lucide="users" class="icono"></i>Listado de clientes</h2>
+                    <div class="listado-botones">
+                        <button type="button" class="btn btn-secundario">
+                            <i data-lucide="cloud-upload" class="icono"></i>Importar (CSV)
+                        </button>
+                        <button type="button" class="btn">
+                            <i data-lucide="plus" class="icono"></i>Nuevo cliente
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filtros">
+                    <div class="buscador">
+                        <i data-lucide="search" class="icono"></i>
+                        <input type="search" id="buscador" placeholder="Buscar por nombre, cédula o teléfono...">
+                    </div>
+
+                    <select id="filtro">
+                        <option value="todos">Todos los clientes</option>
+                        <option value="mascotas">Con mascotas</option>
+                        <option value="sin">Sin mascotas</option>
+                    </select>
+
+                    <select id="orden">
+                        <option value="az">Ordenar por: Nombre (A - Z)</option>
+                        <option value="za">Ordenar por: Nombre (Z - A)</option>
+                        <option value="reciente">Ordenar por: Más recientes</option>
+                    </select>
+                </div>
+
+                <div class="tabla-scroll">
+                    <table class="tabla">
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Documento</th>
+                                <th>Teléfono</th>
+                                <th>Correo</th>
+                                <th>Mascotas</th>
+                                <th>Fecha de registro</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="cliente">
+                                        <span class="avatar">CR</span>
+                                        Carlos Restrepo
+                                    </div>
+                                </td>
+                                <td>1.037.582.904</td>
+                                <td>300 123 4567</td>
+                                <td>carlos.restrepo@gmail.com</td>
+                                <td><span class="chip-mascotas"><i data-lucide="paw-print" class="icono"></i>2</span></td>
+                                <td>12 oct 2026</td>
+                                <td>
+                                    <div class="acciones">
+                                        <button type="button" class="icon-btn" title="Ver"><i data-lucide="eye" class="icono"></i></button>
+                                        <button type="button" class="icon-btn" title="Editar"><i data-lucide="pencil" class="icono"></i></button>
+                                        <button type="button" class="icon-btn" title="Eliminar"><i data-lucide="trash-2" class="icono"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- repite la fila para cada cliente -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="listado-pie">
+                    <span>Mostrando 1 – 5 de 150 clientes</span>
+
+                    <div class="paginacion">
+                        <button type="button" class="pag"><i data-lucide="chevron-left" class="icono"></i></button>
+                        <button type="button" class="pag activa">1</button>
+                        <button type="button" class="pag">2</button>
+                        <button type="button" class="pag">3</button>
+                        <span class="puntos">...</span>
+                        <button type="button" class="pag">30</button>
+                        <button type="button" class="pag"><i data-lucide="chevron-right" class="icono"></i></button>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>lucide.createIcons();</script>
+    <!-- <script src="js/clientes.js"></script> -->
+</body>
+</html>
