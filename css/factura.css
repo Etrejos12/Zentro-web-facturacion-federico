@@ -1,0 +1,444 @@
+/* ============================================================
+   Factura imprimible (hoja blanca tamaño carta/A4)
+   Todas las clases empiezan por "fv-" para no chocar con el resto.
+   El mismo HTML se ve en pantalla y se guarda como PDF con
+   Imprimir -> Guardar como PDF (ver bloque @media print al final).
+   ============================================================ */
+
+.fv-hoja {
+    --fv-tinta:  #0F2B24;
+    --fv-acento: #1F4D3F;
+    --fv-suave:  #e7ece1;
+    --fv-linea:  #cfd7c6;
+    --fv-texto:  #1b2420;
+    --fv-muted:  #6b756b;
+}
+
+/* ---------- Barra superior de la vista previa ---------- */
+
+.fv-barra {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.fv-aviso {
+    margin-bottom: 16px;
+    color: var(--salvia);
+    font-size: 0.9rem;
+}
+
+/* El papel puede ser más ancho que la pantalla: se desplaza dentro de su caja,
+   no la página entera */
+.fv-scroll {
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+/* ---------- La hoja ---------- */
+
+.fv-hoja {
+    width: 794px;
+    margin: 0 auto;
+    padding: 28px 32px 32px;
+    color: var(--fv-texto);
+    font-size: 14px;
+    line-height: 1.35;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.fv-hoja .icono {
+    width: 18px;
+    height: 18px;
+    color: var(--fv-acento);
+}
+
+.fv-ejemplo {
+    margin-bottom: 14px;
+    color: var(--fv-muted);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.fv-falta {
+    color: var(--fv-muted);
+    font-style: italic;
+    font-weight: 400;
+}
+
+/* ---------- Encabezado ---------- */
+
+.fv-cab {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr) 250px;
+    gap: 20px;
+    align-items: start;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--fv-acento);
+}
+
+.fv-logo {
+    display: block;
+    width: 110px;
+    height: auto;
+}
+
+.fv-emisor strong {
+    display: block;
+    color: var(--fv-tinta);
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.fv-emisor .fv-rol {
+    margin-bottom: 10px;
+    color: var(--fv-muted);
+}
+
+.fv-contacto {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.fv-caja-num {
+    overflow: hidden;
+    border: 1px solid var(--fv-linea);
+    border-radius: 8px;
+}
+
+.fv-caja-titulo {
+    padding: 10px 8px;
+    color: var(--fv-tinta);
+    text-align: center;
+    background: var(--fv-suave);
+}
+
+.fv-caja-titulo strong {
+    display: block;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+}
+
+.fv-caja-titulo span {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+}
+
+.fv-numero {
+    padding: 10px 8px;
+    color: var(--fv-tinta);
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.fv-fila {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 7px 12px;
+    border-top: 1px solid var(--fv-linea);
+}
+
+.fv-fila span {
+    color: var(--fv-muted);
+    white-space: nowrap;
+}
+
+.fv-fila strong {
+    color: var(--fv-tinta);
+}
+
+/* ---------- Bloques con título ---------- */
+
+.fv-dos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.fv-bloque {
+    margin-top: 16px;
+}
+
+.fv-dos .fv-bloque {
+    margin-top: 0;
+}
+
+.fv-titulo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    color: var(--fv-tinta);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    background: var(--fv-suave);
+    border-radius: 6px 6px 0 0;
+}
+
+.fv-cuerpo {
+    padding: 12px 14px;
+    border: 1px solid var(--fv-linea);
+    border-top: 0;
+    border-radius: 0 0 6px 6px;
+}
+
+/* Pares "etiqueta  valor" */
+.fv-datos {
+    display: grid;
+    grid-template-columns: 122px minmax(0, 1fr);
+    gap: 6px 10px;
+}
+
+.fv-datos dt {
+    color: var(--fv-muted);
+}
+
+.fv-datos dd {
+    overflow-wrap: anywhere;
+    font-weight: 600;
+}
+
+/* ---------- Tabla de servicios ---------- */
+
+.fv-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--fv-linea);
+}
+
+.fv-tabla th {
+    padding: 9px 10px;
+    color: var(--fv-tinta);
+    font-size: 13px;
+    text-align: left;
+    background: var(--fv-suave);
+}
+
+.fv-tabla td {
+    padding: 9px 10px;
+    border-top: 1px solid var(--fv-linea);
+}
+
+.fv-tabla .fv-num {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.fv-tabla .fv-centro {
+    text-align: center;
+}
+
+/* ---------- Totales ---------- */
+
+.fv-totales {
+    width: 280px;
+    margin: 10px 0 0 auto;
+    overflow: hidden;
+    border: 1px solid var(--fv-linea);
+    border-radius: 6px;
+}
+
+.fv-totales .fv-fila:first-child {
+    border-top: 0;
+}
+
+.fv-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    color: var(--fv-tinta);
+    font-size: 20px;
+    font-weight: 700;
+    background: var(--fv-suave);
+}
+
+/* ---------- Registro fotográfico ---------- */
+
+.fv-fotos {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.fv-foto {
+    margin: 0;
+}
+
+.fv-foto-caja {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    aspect-ratio: 4 / 3;
+    color: var(--fv-muted);
+    font-size: 12px;
+    border: 1.5px dashed var(--fv-linea);
+    border-radius: 6px;
+    background: #f7f9f5;
+}
+
+.fv-foto-caja img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.fv-foto figcaption {
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+.fv-foto figcaption strong {
+    display: block;
+}
+
+/* ---------- Pago y firma ---------- */
+
+.fv-pie {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    align-items: end;
+    margin-top: 16px;
+}
+
+.fv-pie .fv-bloque {
+    margin-top: 0;
+}
+
+.fv-firma {
+    text-align: center;
+}
+
+.fv-firma-linea {
+    height: 56px;
+    border-bottom: 1px solid var(--fv-texto);
+}
+
+.fv-firma strong {
+    display: block;
+    margin-top: 6px;
+    color: var(--fv-tinta);
+}
+
+/* ---------- Pantallas angostas ---------- */
+
+@media (max-width: 520px) {
+    .fv-barra .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ---------- Al imprimir / guardar como PDF ----------
+   Se oculta TODO el panel (menú, pestañas, botones) y solo queda la hoja. */
+
+@page {
+    size: A4;
+    margin: 0;
+}
+
+@media print {
+    html,
+    body {
+        background: #fff !important;
+    }
+
+    .sidebar,
+    .topbar,
+    .tabs,
+    .fv-barra,
+    .fv-aviso,
+    .menu-overlay,
+    [role="tabpanel"]:not(#panel-vista) {
+        display: none !important;
+    }
+
+    .contenedor_menu,
+    .contenedor_principal,
+    #panel-vista {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: none !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    .fv-scroll {
+        overflow: visible;
+        padding: 0;
+    }
+
+    .fv-hoja {
+        width: 210mm;
+        padding: 9mm 12mm;
+        font-size: 13px;
+        border-radius: 0;
+        box-shadow: none;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .fv-ejemplo {
+        margin-bottom: 8px;
+    }
+
+    .fv-cab {
+        padding-bottom: 12px;
+    }
+
+    .fv-dos,
+    .fv-bloque,
+    .fv-pie {
+        margin-top: 12px;
+    }
+
+    .fv-foto-caja {
+        aspect-ratio: 2 / 1;
+    }
+
+    .fv-tabla td,
+    .fv-tabla th {
+        padding: 6px 10px;
+    }
+
+    .fv-datos {
+        gap: 4px 10px;
+    }
+
+    .fv-cuerpo {
+        padding: 9px 14px;
+    }
+
+    .fv-firma-linea {
+        height: 40px;
+    }
+
+    /* Que ningún bloque se parta entre dos páginas */
+    .fv-bloque,
+    .fv-totales,
+    .fv-pie,
+    .fv-tabla tr {
+        break-inside: avoid;
+    }
+}
