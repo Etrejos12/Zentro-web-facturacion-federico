@@ -69,6 +69,7 @@ document.getElementById('formFiltros').addEventListener('submit', (e) => {
 // deja solo la hoja de la factura. Se elige "Guardar como PDF" como destino.
 document.getElementById('btnPdf').addEventListener('click', () => {
     window.print()
+
 })
 
 // ---------- Cerrar sesión ----------
