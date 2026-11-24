@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script type="module" src="js/responsive.js"></script>
+    <title>Facturación</title>
+</head>
+<body>
+    <div class="contenedor_menu">
+
+        <aside class="sidebar">
+            <div class="header-menu">
+                <img class="logo" src="assets/logo-principal.png" alt="Logo de Federico Arango V.">
+                <span class="nombre">
+                    Federico Arango V.
+                    <small>Médico veterinario</small>
+                </span>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="dashboard_home.html"><i data-lucide="home" class="icono"></i>Inicio</a></li>
+                    <li><a href="dashboard_clientes.html"><i data-lucide="users" class="icono"></i>Clientes</a></li>
+                    <li><a href="#"><i data-lucide="paw-print" class="icono"></i>Pacientes</a></li>
+                    <li><a href="#"><i data-lucide="layout-grid" class="icono"></i>Servicios</a></li>
+                    <li><a href="dashboard_facturacion.html" class="active"><i data-lucide="file-text" class="icono"></i>Facturación</a></li>
+                    <li><a href="#"><i data-lucide="bar-chart-3" class="icono"></i>Reportes</a></li>
+                    <li><a href="dashboard_configuracion.html"><i data-lucide="settings" class="icono"></i>Configuración</a></li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-usuario">
+                <span class="usuario-avatar"><i data-lucide="user" class="icono"></i></span>
+                <div class="usuario-datos">
+                    <strong>Federico Arango V.</strong>
+                    <small>Médico Veterinario</small>
+                </div>
+                <button type="button" class="icon-btn" id="btnSalir" title="Cerrar sesión" aria-label="Cerrar sesión">
+                    <i data-lucide="power" class="icono"></i>
+                </button>
+            </div>
+        </aside>
+
+        <main class="contenedor_principal">
+
+            <header class="topbar">
+                <div class="topbar-titulos">
+                    <h1>Facturación</h1>
+                    <p class="topbar-sub">Gestiona tus facturas y documentos de venta</p>
+                </div>
+                <div class="topbar-iconos">
+                    <button type="button" class="icon-btn icon-btn-redondo" aria-label="Notificaciones">
+                        <i data-lucide="bell" class="icono"></i><span class="punto"></span>
+                    </button>
+                    <button type="button" class="icon-btn icon-btn-redondo" aria-label="Mi cuenta">
+                        <i data-lucide="user" class="icono"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="vidrio tabs" role="tablist" aria-label="Secciones de facturación">
+                <button type="button" class="tab" role="tab" id="tab-resumen"
+                        aria-selected="true" aria-controls="panel-resumen">
+                    <i data-lucide="bar-chart-3" class="icono"></i>Resumen
+                </button>
+                <button type="button" class="tab" role="tab" id="tab-facturas"
+                        aria-selected="false" aria-controls="panel-facturas" tabindex="-1">
+                    <i data-lucide="file-text" class="icono"></i>Facturas
+                </button>
+                <button type="button" class="tab" role="tab" id="tab-nueva"
+                        aria-selected="false" aria-controls="panel-nueva" tabindex="-1">
+                    <i data-lucide="plus-circle" class="icono"></i>Nueva factura
+                </button>
+            </div>
+
+            <!-- ===== Pestaña 1: Resumen ===== -->
+            <div id="panel-resumen" role="tabpanel" aria-labelledby="tab-resumen" class="factura-layout">
+
+                <div class="factura-principal">
+
+                    <section class="stats stats-4">
+                        <article class="vidrio stat-card">
+                            <div class="stat-icono"><i data-lucide="file-text" class="icono"></i></div>
+                            <div>
+                                <span class="stat-label">Facturas este mes</span>
+                                <strong class="stat-valor">25</strong>
+                            </div>
+                        </article>
+
+                        <article class="vidrio stat-card">
+                            <div class="stat-icono"><i data-lucide="coins" class="icono"></i></div>
+                            <div>
+                                <span class="stat-label">Total facturado</span>
+                                <strong class="stat-valor">$3.250.000</strong>
+                            </div>
+                        </article>
+
+                        <article class="vidrio stat-card">
+                            <div class="stat-icono"><i data-lucide="clock" class="icono"></i></div>
+                            <div>
+                                <span class="stat-label">Pendiente por cobrar</span>
+                                <strong class="stat-valor">$450.000</strong>
+                            </div>
+                        </article>
+
+                        <article class="vidrio stat-card">
+                            <div class="stat-icono"><i data-lucide="tag" class="icono"></i></div>
+                            <div>
+                                <span class="stat-label">Última factura</span>
+                                <strong class="stat-valor">FV-0250</strong>
+                            </div>
+                        </article>
+                    </section>
+
+                    <section class="vidrio panel">
+                        <div class="panel-cabecera">
+                            <h2 class="panel-titulo"><i data-lucide="file-text" class="icono"></i>Facturas recientes</h2>
+                            <a href="#" class="ver-todas" data-abrir-tab="tab-facturas">
+                                Ver todas<i data-lucide="arrow-right" class="icono"></i>
+                            </a>
+                        </div>
+
+                        <div class="tabla-scroll">
+                            <table class="tabla" id="tablaFacturas">
+                                <thead>
+                                    <tr>
+                                        <th>N° Factura</th>
+                                        <th>Cliente</th>
+                                        <th>Mascota</th>
+                                        <th>Fecha</th>
+                                        <th>Total</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-estado="pendiente">
+                                        <td><strong>FV-0250</strong></td>
+                                        <td>Carlos Restrepo</td>
+                                        <td><span class="con-icono"><i data-lucide="paw-print" class="icono"></i>Max</span></td>
+                                        <td>23 nov 2026</td>
+                                        <td>$120.000</td>
+                                        <td><span class="estado pendiente">Pendiente</span></td>
+                                        <td>
+                                            <div class="acciones">
+                                                <button type="button" class="icon-btn" title="Ver"><i data-lucide="eye" class="icono"></i></button>
+                                                <button type="button" class="icon-btn" title="Descargar"><i data-lucide="download" class="icono"></i></button>
+                                                <button type="button" class="icon-btn" title="Más opciones"><i data-lucide="more-horizontal" class="icono"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-estado="pagada">
+                                        <td><strong>FV-0249</strong></td>
+                                        <td>Mariana Gómez</td>
+                                        <td><span class="con-icono"><i data-lucide="paw-print" class="icono"></i>Luna</span></td>
+                                        <td>22 nov 2026</td>
+                                        <td>$60.000</td>
+                                        <td><span class="estado pagada">Pagada</span></td>
+                                        <td>
+                                            <div class="acciones">
+                                                <button type="button" class="icon-btn" title="Ver"><i data-lucide="eye" class="icono"></i></button>
+                                                <button type="button" class="icon-btn" title="Descargar"><i data-lucide="download" class="icono"></i></button>
+                                                <button type="button" class="icon-btn" title="Más opciones"><i data-lucide="more-horizontal" class="icono"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-estado="pagada">
+                                        <td><strong>FV-0248</strong></td>
+                                        <td>Andrés Vélez</td>
+                                        <td><span class="con-icono"><i data-lucide="paw-print" class="icono"></i>Trueno</span></td>
+                                        <td>21 nov 2026</td>
+                                        <td>$80.000</td>
+                                        <td><span class="estado pagada">Pagada</span></td>
+                                        <td>
+                                            <div class="acciones">
+                                                <button type="button" class="icon-btn" title="Ver"><i data-lucide="eye" class="icono"></i></button>
+                                                <button type="button" class="icon-btn" title="Descargar"><i data-lucide="download" class="icono"></i></button>
+                                                <button type="button" class="icon-btn" title="Más opciones"><i data-lucide="more-horizontal" class="icono"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-estado="pagada">
+                                        <td><strong>FV-0247</strong></td>
+                                        <td>Laura Mejía</td>
+                                        <td><span class="con-icono"><i data-lucide="paw-print" class="icono"></i>Canela</span></td>
+                                        <td>20 nov 2026</td>
+                                        <td>$150.000</td>
+                                        <td><span class="estado pagada">Pagada</span></td>
+                                        <td>
+                                            <div class="acciones">
+                                                <button type="button" class="icon-btn" title="Ver"><i data-lucide="eye" class="icono"></i></button>
+                                                <button type="button" class="icon-btn" title="Descargar"><i data-lucide="download" class="icono"></i></button>
+                                                <button type="button" class="icon-btn" title="Más opciones"><i data-lucide="more-horizontal" class="icono"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-estado="pendiente">
+                                        <td><strong>FV-0246</strong></td>
+                                        <td>Diego Salazar</td>
+                                        <td><span class="con-icono"><i data-lucide="paw-print" class="icono"></i>Rocky</span></td>
+                                        <td>19 nov 2026</td>
+                                        <td>$90.000</td>
+                                        <td><span class="estado pendiente">Pendiente</span></td>
+                                        <td>
+                                            <div class="acciones">
+                                                <button type="button" class="icon-btn" title="Ver"><i data-lucide="eye" class="icono"></i></button>
+                                                <button type="button" class="icon-btn" title="Descargar"><i data-lucide="download" class="icono"></i></button>
+                                                <button type="button" class="icon-btn" title="Más opciones"><i data-lucide="more-horizontal" class="icono"></i></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="sin-resultados" id="sinResultados" hidden>No hay facturas que coincidan con la búsqueda.</p>
+                    </section>
+                </div>
+
+                <aside class="factura-lateral">
+
+                    <section class="vidrio panel">
+                        <h3><i data-lucide="zap" class="icono"></i>Acciones rápidas</h3>
+                        <button type="button" class="btn btn-grande" data-abrir-tab="tab-nueva">
+                            <i data-lucide="plus-circle" class="icono"></i>Nueva factura
+                        </button>
+                    </section>
+
+                    <section class="vidrio panel">
+                        <h3><i data-lucide="search" class="icono"></i>Buscar factura</h3>
+                        <input type="search" id="buscarFactura" placeholder="N° factura, cliente o mascota">
+                    </section>
+
+                    <form class="vidrio panel" id="formFiltros">
+                        <h3><i data-lucide="filter" class="icono"></i>Filtros</h3>
+
+                        <div class="campo">
+                            <label for="filtroPeriodo">Periodo</label>
+                            <select id="filtroPeriodo">
+                                <option>Noviembre 2026</option>
+                                <option>Octubre 2026</option>
+                            </select>
+                        </div>
+
+                        <div class="campo">
+                            <label for="filtroEstado">Estado</label>
+                            <select id="filtroEstado">
+                                <option value="todos">Todos</option>
+                                <option value="pendiente">Pendiente</option>
+                                <option value="pagada">Pagada</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-grande">
+                            <i data-lucide="filter" class="icono"></i>Aplicar filtros
+                        </button>
+                    </form>
+                </aside>
+            </div>
+
+            <!-- ===== Pestañas 2 y 3 (pendientes de construir) ===== -->
+            <section id="panel-facturas" role="tabpanel" aria-labelledby="tab-facturas" class="vidrio panel" hidden>
+                <h2 class="panel-titulo"><i data-lucide="file-text" class="icono"></i>Todas las facturas</h2>
+                <p class="sin-resultados">Aquí irá el listado completo con paginación.</p>
+            </section>
+
+            <section id="panel-nueva" role="tabpanel" aria-labelledby="tab-nueva" class="vidrio panel" hidden>
+                <h2 class="panel-titulo"><i data-lucide="plus-circle" class="icono"></i>Nueva factura</h2>
+                <p class="sin-resultados">Aquí irá el formulario para crear una factura.</p>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>lucide.createIcons();</script>
+    <script src="js/facturas.js"></script>
+</body>
+</html>

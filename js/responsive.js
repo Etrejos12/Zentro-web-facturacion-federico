@@ -61,7 +61,9 @@ function iniciarMenu() {
     btnMenu.setAttribute('aria-controls', sidebar.id)
     btnMenu.innerHTML = iconoMenu + iconoCerrar
 
-    const titulo = topbar.querySelector('h1')
+    // Si el h1 vive dentro de un contenedor (título + subtítulo), se mueve el contenedor entero
+    const h1 = topbar.querySelector('h1')
+    const titulo = h1 && h1.parentElement !== topbar ? h1.parentElement : h1
     const grupoIzquierdo = document.createElement('div')
     grupoIzquierdo.className = 'topbar-izq'
     topbar.insertBefore(grupoIzquierdo, topbar.firstChild)
