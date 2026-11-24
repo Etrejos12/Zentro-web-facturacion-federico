@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/factura.css">
     <link rel="stylesheet" href="css/responsive.css">
     <script type="module" src="js/responsive.js"></script>
     <title>Facturación</title>
@@ -73,6 +74,10 @@
                 <button type="button" class="tab" role="tab" id="tab-nueva"
                         aria-selected="false" aria-controls="panel-nueva" tabindex="-1">
                     <i data-lucide="plus-circle" class="icono"></i>Nueva factura
+                </button>
+                <button type="button" class="tab" role="tab" id="tab-vista"
+                        aria-selected="false" aria-controls="panel-vista" tabindex="-1">
+                    <i data-lucide="file-search" class="icono"></i>Vista previa
                 </button>
             </div>
 
@@ -269,6 +274,166 @@
             <section id="panel-nueva" role="tabpanel" aria-labelledby="tab-nueva" class="vidrio panel" hidden>
                 <h2 class="panel-titulo"><i data-lucide="plus-circle" class="icono"></i>Nueva factura</h2>
                 <p class="sin-resultados">Aquí irá el formulario para crear una factura.</p>
+            </section>
+
+            <!-- ===== Pestaña 4: Vista previa de la factura (PDF) ===== -->
+            <section id="panel-vista" role="tabpanel" aria-labelledby="tab-vista" hidden>
+
+                <div class="fv-barra">
+                    <h2 class="panel-titulo"><i data-lucide="file-search" class="icono"></i>Vista previa de la factura</h2>
+                    <button type="button" class="btn" id="btnPdf">
+                        <i data-lucide="download" class="icono"></i>Descargar PDF
+                    </button>
+                </div>
+                <p class="fv-aviso">
+                    Ejemplo con datos de muestra (cliente, servicios y valores). Los datos de Federico saldrán de
+                    Configuración. Al pulsar “Descargar PDF” elige “Guardar como PDF” como destino.
+                </p>
+
+                <div class="fv-scroll">
+                    <article class="fv-hoja" id="facturaHoja">
+
+                        <p class="fv-ejemplo">Ejemplo · datos de muestra</p>
+
+                        <!-- Encabezado: logo, emisor y número -->
+                        <header class="fv-cab">
+                            <img class="fv-logo" src="assets/logo-principal.png" alt="Logo de Federico Arango V.">
+
+                            <div class="fv-emisor">
+                                <strong data-campo="emisor.nombre">Federico Arango V.</strong>
+                                <p class="fv-rol" data-campo="emisor.cargo">Médico Veterinario</p>
+                                <p class="fv-contacto"><i data-lucide="map-pin" class="icono"></i><span class="fv-falta" data-campo="emisor.direccion">Dirección por completar</span></p>
+                                <p class="fv-contacto"><i data-lucide="phone" class="icono"></i><span class="fv-falta" data-campo="emisor.telefono">Teléfono por completar</span></p>
+                                <p class="fv-contacto"><i data-lucide="mail" class="icono"></i><span class="fv-falta" data-campo="emisor.correo">Correo por completar</span></p>
+                            </div>
+
+                            <div class="fv-caja-num">
+                                <div class="fv-caja-titulo">
+                                    <strong>FACTURA</strong>
+                                    <span>DE SERVICIOS VETERINARIOS</span>
+                                </div>
+                                <div class="fv-numero" data-campo="factura.numero">N.° FV-0250</div>
+                                <div class="fv-fila"><span>Fecha de emisión</span><strong data-campo="factura.fecha">23/11/2026</strong></div>
+                                <div class="fv-fila"><span>Forma de pago</span><strong data-campo="factura.forma_pago">Transferencia</strong></div>
+                            </div>
+                        </header>
+
+                        <!-- Cliente y paciente -->
+                        <div class="fv-dos">
+                            <section class="fv-bloque">
+                                <h3 class="fv-titulo"><i data-lucide="user" class="icono"></i>Datos del cliente</h3>
+                                <dl class="fv-cuerpo fv-datos">
+                                    <dt>Nombre</dt><dd data-campo="cliente.nombre">Carlos Restrepo</dd>
+                                    <dt>Identificación</dt><dd data-campo="cliente.documento">1.037.582.904</dd>
+                                    <dt>Teléfono</dt><dd data-campo="cliente.telefono">300 123 4567</dd>
+                                    <dt>Dirección</dt><dd data-campo="cliente.direccion">—</dd>
+                                    <dt>Correo</dt><dd data-campo="cliente.correo">carlos.restrepo@gmail.com</dd>
+                                </dl>
+                            </section>
+
+                            <section class="fv-bloque">
+                                <h3 class="fv-titulo"><i data-lucide="paw-print" class="icono"></i>Datos del paciente</h3>
+                                <dl class="fv-cuerpo fv-datos">
+                                    <dt>Nombre</dt><dd data-campo="paciente.nombre">Max</dd>
+                                    <dt>Especie</dt><dd data-campo="paciente.especie">—</dd>
+                                    <dt>Raza</dt><dd data-campo="paciente.raza">—</dd>
+                                    <dt>Sexo</dt><dd data-campo="paciente.sexo">—</dd>
+                                    <dt>Edad</dt><dd data-campo="paciente.edad">—</dd>
+                                    <dt>Microchip</dt><dd data-campo="paciente.microchip">—</dd>
+                                </dl>
+                            </section>
+                        </div>
+
+                        <!-- Detalle de servicios -->
+                        <section class="fv-bloque">
+                            <h3 class="fv-titulo"><i data-lucide="clipboard-list" class="icono"></i>Detalle de servicios</h3>
+                            <table class="fv-tabla">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Servicio / Procedimiento</th>
+                                        <th class="fv-centro">Cantidad</th>
+                                        <th class="fv-num">Valor unitario</th>
+                                        <th class="fv-num">Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>23/11/2026</td>
+                                        <td>Consulta general</td>
+                                        <td class="fv-centro">1</td>
+                                        <td class="fv-num">$ 60.000</td>
+                                        <td class="fv-num">$ 60.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>23/11/2026</td>
+                                        <td>Desparasitación</td>
+                                        <td class="fv-centro">1</td>
+                                        <td class="fv-num">$ 30.000</td>
+                                        <td class="fv-num">$ 30.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>23/11/2026</td>
+                                        <td>Vacuna</td>
+                                        <td class="fv-centro">1</td>
+                                        <td class="fv-num">$ 30.000</td>
+                                        <td class="fv-num">$ 30.000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="fv-totales">
+                                <div class="fv-fila"><span>Subtotal</span><strong data-campo="factura.subtotal">$ 120.000</strong></div>
+                                <div class="fv-fila"><span>Descuento</span><strong data-campo="factura.descuento">$ 0</strong></div>
+                                <div class="fv-total"><span>Total</span><span data-campo="factura.total">$ 120.000</span></div>
+                            </div>
+                        </section>
+
+                        <!-- Evidencia fotográfica -->
+                        <section class="fv-bloque">
+                            <h3 class="fv-titulo"><i data-lucide="camera" class="icono"></i>Registro fotográfico</h3>
+                            <div class="fv-cuerpo fv-fotos">
+                                <figure class="fv-foto">
+                                    <div class="fv-foto-caja"><i data-lucide="image-plus" class="icono"></i>Foto 1</div>
+                                    <figcaption><strong>23/11/2026</strong>Consulta general</figcaption>
+                                </figure>
+                                <figure class="fv-foto">
+                                    <div class="fv-foto-caja"><i data-lucide="image-plus" class="icono"></i>Foto 2</div>
+                                    <figcaption><strong>23/11/2026</strong>Desparasitación</figcaption>
+                                </figure>
+                                <figure class="fv-foto">
+                                    <div class="fv-foto-caja"><i data-lucide="image-plus" class="icono"></i>Foto 3</div>
+                                    <figcaption><strong>23/11/2026</strong>Vacuna</figcaption>
+                                </figure>
+                                <figure class="fv-foto">
+                                    <div class="fv-foto-caja"><i data-lucide="image-plus" class="icono"></i>Foto 4</div>
+                                    <figcaption><strong>—</strong>Sin descripción</figcaption>
+                                </figure>
+                            </div>
+                        </section>
+
+                        <!-- Datos de pago y firma -->
+                        <div class="fv-pie">
+                            <section class="fv-bloque">
+                                <h3 class="fv-titulo"><i data-lucide="credit-card" class="icono"></i>Datos de pago</h3>
+                                <dl class="fv-cuerpo fv-datos">
+                                    <dt>Método de pago</dt><dd data-campo="pago.metodo">Transferencia</dd>
+                                    <dt>Banco</dt><dd class="fv-falta" data-campo="pago.banco">Por completar</dd>
+                                    <dt>Tipo de cuenta</dt><dd class="fv-falta" data-campo="pago.tipo">Por completar</dd>
+                                    <dt>Número de cuenta</dt><dd class="fv-falta" data-campo="pago.numero">Por completar</dd>
+                                    <dt>Titular</dt><dd class="fv-falta" data-campo="pago.titular">Por completar</dd>
+                                </dl>
+                            </section>
+
+                            <div class="fv-firma">
+                                <div class="fv-firma-linea"></div>
+                                <strong>Federico Arango V.</strong>
+                                <span>Médico Veterinario</span>
+                            </div>
+                        </div>
+
+                    </article>
+                </div>
             </section>
 
         </main>

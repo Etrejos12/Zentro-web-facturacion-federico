@@ -64,6 +64,13 @@ document.getElementById('formFiltros').addEventListener('submit', (e) => {
     filtrar()
 })
 
+// ---------- Descargar PDF ----------
+// window.print() abre el diálogo de impresión; el CSS (@media print en factura.css)
+// deja solo la hoja de la factura. Se elige "Guardar como PDF" como destino.
+document.getElementById('btnPdf').addEventListener('click', () => {
+    window.print()
+})
+
 // ---------- Cerrar sesión ----------
 document.getElementById('btnSalir').addEventListener('click', () => {
     // Pendiente: aquí va el cierre de sesión real de Supabase (auth.signOut())
